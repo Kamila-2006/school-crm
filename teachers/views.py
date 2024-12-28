@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Teacher
 from subjects.models import Subject
 
@@ -34,3 +34,8 @@ def teacher_add(request):
     subjects = Subject.objects.all()
     ctx = {'subjects':subjects}
     return render(request, 'teachers/teacher-add.html', ctx)
+
+def teacher_detail(request, teacher_id):
+    teacher = get_object_or_404(Teacher, pk=teacher_id)
+    ctx = {'teacher':teacher}
+    return render(request, 'teachers/teacher-detail.html', ctx)

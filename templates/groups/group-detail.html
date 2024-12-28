@@ -27,7 +27,7 @@
                         <tr>
                             <td>{{ student.id }}</td>
                             <td>{{ student.full_name }}</td>
-                            <td><button class="btn btn-info">Ko'rish</button></td>
+                            <td><a class="btn btn-info" href="{% url 'students:detail' student.id %}">Ko'rish</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
