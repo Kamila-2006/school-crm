@@ -26,9 +26,9 @@
                     <td>{{ teacher.last_name }}</td>
                     <td>{{ teacher.subject }}</td>
                     <td>
-                        <a href="teacher-detail.html?id=1" class="btn btn-sm"><i class="fas fa-eye"></i> Ko'rish</a>
-                        <a href="teacher-update.html?id=1" class="btn btn-sm"><i class="fas fa-edit"></i> Tahrirlash</a>
-                        <a href="teacher-delete.html?id=1" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> O'chirish</a>
+                        <a href="{% url 'teachers:detail' teacher.id %}" class="btn btn-sm"><i class="fas fa-eye"></i> Ko'rish</a>
+                        <a href="{% url 'teachers:update' teacher.id %}" class="btn btn-sm"><i class="fas fa-edit"></i> Tahrirlash</a>
+                        <a href="{% url 'teachers:delete' teacher.id %}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> O'chirish</a>
                     </td>
                 </tr>
             {% empty %}

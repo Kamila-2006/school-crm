@@ -38,3 +38,30 @@ def group_detail(request, group_id):
     students = group.students.all()
     ctx = {'group':group, 'students':students}
     return render(request, 'groups/group-detail.html', ctx)
+
+def group_update(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        teacher_id = request.POST.get('teacher')
+        student_ids = request.POST.getlist('students')
+        if name and teacher_id and student_ids:
+            group.name = name
+            group.teacher = Teacher.objects.get(id=teacher_id)
+            students = Student.objects.filter(id__in=student_ids)
+            group.students.set(students)
+            group.save()
+            return redirect('groups:detail', group.id)
+    teachers = Teacher.objects.all()
+    students = Student.objects.all()
+    ctx = {
+        'group':group,
+        'teachers':teachers,
+        'students':students,
+    }
+    return render(request, 'groups/group-add.html', ctx)
+
+def group_delete(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    group.delete()
+    return redirect('groups:list')

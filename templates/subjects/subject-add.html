@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Maktab CRM - Yangi fan yaratish{% endblock %}
+{% block title %}{% if subject %}Maktab CRM - Fan tarihlash{% else %}Maktab CRM - Yangi fan yaratish{% endif %}{% endblock %}
 
 {% block content %}
-    <h1>Yangi fan yaratish</h1>
+    <h1>{% if subject %}Fan tarihlash{% else %}Yangi fan yaratish{% endif %}</h1>
     <form id="createSubjectForm" method="post">
         {% csrf_token %}
         <div class="form-group">
@@ -20,7 +20,11 @@
         </div>
         <div class="actions">
             <button type="submit" class="btn"><i class="fas fa-save"></i> Saqlash</button>
-            <a href="{% url 'subjects:list' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Bekor qilish</a>
+            {% if subject %}
+                <a href="{% url 'subjects:detail' subject.id %}" class="btn btn-secondary"><i class="fas fa-times"></i> Bekor qilish</a>
+            {% else %}
+                <a href="{% url 'subjects:list' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Bekor qilish</a>
+            {% endif %}
         </div>
     </form>
 {% endblock %}

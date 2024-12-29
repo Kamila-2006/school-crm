@@ -26,8 +26,8 @@
                     <td>{{ student.group.name }}</td>
                     <td>
                         <a href="{% url 'students:detail' student.id %}" class="btn btn-sm"><i class="fas fa-eye"></i> Ko'rish</a>
-                        <a href="student-update.html?id=1" class="btn btn-sm"><i class="fas fa-edit"></i> Tahrirlash</a>
-                        <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> O'chirish</a>
+                        <a href="{% url 'students:update' student.id %}" class="btn btn-sm"><i class="fas fa-edit"></i> Tahrirlash</a>
+                        <a href="{% url 'students:delete' student.id %}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> O'chirish</a>
                     </td>
                 </tr>
             {% empty %}

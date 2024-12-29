@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Maktab CRM - Yangi O'qituvchi yaratish{% endblock %}
+{% block title %}{% if teacher %}Maktab CRM - O'qituvchi tahrirlash{% else %}Maktab CRM - Yangi O'qituvchi yaratish{% endif %}{% endblock %}
 
 {% block content %}
-    <h1>Yangi O'qituvchi yaratish</h1>
+    <h1>{% if teacher %}O'qituvchi tahrirlash{% else %}Yangi O'qituvchi yaratish{% endif %}</h1>
     <form id="createTeacherForm" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
@@ -40,7 +40,11 @@
         </div>
         <div class="actions">
             <button type="submit" class="btn"><i class="fas fa-save"></i> Saqlash</button>
-            <a href="{% url 'teachers:list' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Bekor qilish</a>
+            {% if teacher %}
+                <a href="{% url 'teachers:detail' teacher.id %}" class="btn btn-secondary"><i class="fas fa-times"></i> Bekor qilish</a>
+            {% else %}
+                <a href="{% url 'teachers:list' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Bekor qilish</a>
+            {% endif %}
         </div>
     </form>
 {% endblock %}

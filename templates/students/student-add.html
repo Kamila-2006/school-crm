@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Maktab CRM - O'quvchi yaratish{% endblock %}
+{% block title %}{% if student %}Maktab CRM - O'quvchi tarihlash{% else %}Maktab CRM - O'quvchi yaratish{% endif %}{% endblock %}
 
 {% block content %}
-    <h1>O'quvchi yaratish</h1>
+    <h1>{% if student %}O'quvchi tarihlash{% else %}O'quvchi yaratish{% endif %}</h1>
     <form id="createStudentForm" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
@@ -37,7 +37,11 @@
         </div>
         <div class="actions">
             <button type="submit" class="btn"><i class="fas fa-save"></i> Saqlash</button>
-            <a href="{% url 'students:list' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Bekor qilish</a>
+            {% if student %}
+                <a href="{% url 'students:detail' student.id %}" class="btn btn-secondary"><i class="fas fa-times"></i> Bekor qilish</a>
+            {% else %}
+                <a href="{% url 'students:list' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Bekor qilish</a>
+            {% endif %}
         </div>
     </form>
 {% endblock %}

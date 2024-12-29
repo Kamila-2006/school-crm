@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="actions">
-        <a href="teacher-update.html" class="btn"><i class="fas fa-edit"></i> Tahrirlash</a>
-        <a href="{% url 'teachers:list' %}" class="btn btn-danger"><i class="fas fa-trash"></i> O'chirish</a>
+        <a href="{% url 'teachers:update' teacher.id %}" class="btn"><i class="fas fa-edit"></i> Tahrirlash</a>
+        <a href="{% url 'teachers:delete' teacher.id %}" class="btn btn-danger"><i class="fas fa-trash"></i> O'chirish</a>
     </div>
 {% endblock %}

@@ -24,9 +24,9 @@
                     <td>{{ subject.name }}</td>
                     <td>{{ subject.teachers.count }}</td>
                     <td>
-                        <a href="subject-detail.html?id=1" class="btn btn-sm"><i class="fas fa-eye"></i> Ko'rish</a>
-                        <a href="subject-update.html?id=1" class="btn btn-sm"><i class="fas fa-edit"></i> Tahrirlash</a>
-                        <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> O'chirish</a>
+                        <a href="{% url 'subjects:detail' subject.id %}" class="btn btn-sm"><i class="fas fa-eye"></i> Ko'rish</a>
+                        <a href="{% url 'subjects:update' subject.id %}" class="btn btn-sm"><i class="fas fa-edit"></i> Tahrirlash</a>
+                        <a href="{% url 'subjects:delete' subject.id %}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> O'chirish</a>
                     </td>
                 </tr>
             {% empty %}

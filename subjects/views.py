@@ -26,5 +26,31 @@ def subject_add(request):
 
 def subject_detail(request, subject_id):
     subject = get_object_or_404(Subject, pk=subject_id)
-    ctx = {'subject':subject}
+    teachers = subject.teachers.all()
+    ctx = {'subject':subject, 'teachers':teachers}
     return render(request, 'subjects/subject-detail.html', ctx)
+
+def subject_update(request, subject_id):
+    subject = get_object_or_404(Subject, pk=subject_id)
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        teacher_ids = request.POST.getlist('teachers')
+        if name and teacher_ids:
+            subject.name = name
+            subject.save()
+            for teacher_id in teacher_ids:
+                teacher = Teacher.objects.get(id=teacher_id)
+                subject.teachers.add(teacher)
+            subject.save()
+            return redirect('subjects:detail', subject.id)
+    teachers = Teacher.objects.all()
+    ctx = {
+        'subject': subject,
+        'teachers': teachers,
+    }
+    return render(request, 'subjects/subject-add.html', ctx)
+
+def subject_delete(request, subject_id):
+    subject = get_object_or_404(Subject, pk=subject_id)
+    subject.delete()
+    return redirect('subjects:list')
